@@ -2,10 +2,10 @@ node {
     def WORKSPACE = "/var/lib/jenkins/workspace/springboot"
     def dockerImageTag = "springboot{env.BUILD_NUMBER}"
 
-    try{
-//          notifyBuild('STARTED')
-         stage('Clone Repo') {
-            // for display purposes
+pipeline {
+    agent any
+    stages {
+        stage('Clone Repo') {
             // Get some code from a GitHub repository
             git url: 'https://github.com/arizki-25/springboot.git',
                 credentialsId: 'springdeploy',
@@ -19,6 +19,7 @@ node {
                   echo "Docker Image Tag Name: ${dockerImageTag}"
                   sh "docker stop springboot || true && docker rm springboot || true"
                   sh "docker run --name springboot -d -p 8081:8081 springboot:${env.BUILD_NUMBER}"
-          }
+            }
         }
     }
+}    
