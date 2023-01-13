@@ -15,7 +15,7 @@ public class DemoDeployApplication {
 
 	@GetMapping("/")
 	public String home(){
-		return "Technical Assesment";
+		return "Technical Assesment 2";
 	}
 
 }
