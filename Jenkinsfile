@@ -7,19 +7,35 @@ node {
          stage('Clone Repo') {
             // for display purposes
             // Get some code from a GitHub repository
-            git url: 'https://github.com/arizki-25/springboot.git',
+                git url: 'https://github.com/arizki-25/springboot.git',
                 credentialsId: 'springdeploy',
                 branch: 'main'
          }
           stage('Build docker') {
-                 dockerImage = docker.build("springboot:${env.BUILD_NUMBER}")
+                dockerImage = docker.build("springboot:${env.BUILD_NUMBER}")
           }
 
           stage('Deploy docker'){
-                  echo "Docker Image Tag Name: ${dockerImageTag}"
-                  sh "docker stop springboot || true && docker rm springboot || true"
-                  sh "docker run --name springboot -d -p 8081:8081 springboot:${env.BUILD_NUMBER}"
+                echo "Docker Image Tag Name: ${dockerImageTag}"
+                sh "docker stop springboot || true && docker rm springboot || true"
+                sh "docker run --name springboot -d -p 8081:8081 springboot:${env.BUILD_NUMBER}"
           }
+         stage('Deploy to kube cluster') {
+                when {
+                    branch 'main'
+                }
+                steps
+                    
+         }
+
+
+
+
+
+
+
+
+
     }catch(e){
 //         currentBuild.result = "FAILED"
         throw e
