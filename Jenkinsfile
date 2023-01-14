@@ -20,22 +20,6 @@ node {
                 sh "docker stop springboot || true && docker rm springboot || true"
                 sh "docker run --name springboot -d -p 8081:8081 springboot:${env.BUILD_NUMBER}"
           }
-         stage('Deploy to kube cluster') {
-                when {
-                    branch 'main'
-                }
-                steps
-                    
-         }
-
-
-
-
-
-
-
-
-
     }catch(e){
 //         currentBuild.result = "FAILED"
         throw e
