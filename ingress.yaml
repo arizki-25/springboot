@@ -15,7 +15,7 @@ spec:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   rules:
-  - host: 110.239.71.215:8081
+  - host: springboot.com
     http:
       paths:
       #- path: /belajar
@@ -24,7 +24,7 @@ spec:
           servicePort: 80
   defaultBackend:
     resource:
-      apiGroup: 110.239.71.215:8081
+      apiGroup: springboot.com
       kind: StorageBucket
       name: static-assets
   rules:
@@ -34,7 +34,7 @@ spec:
             pathType: ImplementationSpecific
             backend:
               resource:
-                apiGroup: 110.239.71.215:8081
+                apiGroup: springboot.com
                 kind: StorageBucket
                 name: icon-assets
 ---
