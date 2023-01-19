@@ -21,7 +21,7 @@ node {
                 sh "docker run --name springboot -d -p 8081:8081 springboot:${env.BUILD_NUMBER}"
           }
           stage('Deploy Kubernetes'){
-                sh sed -i -e "s/branch/$GIT_BRANCH/" kubectl apply -f springboot.yaml
+                sh kubectl apply -f springboot.yaml
           }
     }catch(e){
 //         currentBuild.result = "FAILED"
