@@ -21,7 +21,7 @@ node {
                 sh "docker run --name springboot -d -p 8081:8081 springboot:${env.BUILD_NUMBER}"
           }
           stage('Deploy Kubernetes'){
-                sh "kubectl apply -f ingress.yaml"
+                sh "kubectl apply -f springboot.yaml"
           }
     }catch(e){
 //         currentBuild.result = "FAILED"
