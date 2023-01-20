@@ -20,7 +20,7 @@ metadata:
     app: springboot-app
     type: backend
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: springboot-app
@@ -47,16 +47,15 @@ spec:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   rules:
-  - host: springboot.com
+  - host:
     http:
       paths:
-      #- path: /belajar
       - backend:
           serviceName: kubernetes
           servicePort: 80
   defaultBackend:
     resource:
-      apiGroup: springboot.com
+      apiGroup:
       kind: StorageBucket
       name: static-assets
   rules:
@@ -66,6 +65,6 @@ spec:
             pathType: ImplementationSpecific
             backend:
               resource:
-                apiGroup: springboot.com
+                apiGroup:
                 kind: StorageBucket
                 name: icon-assets
