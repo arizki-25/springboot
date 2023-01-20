@@ -21,7 +21,7 @@ node {
                 sh "docker run --name springboot -d -p 8081:8081 springboot:${env.BUILD_NUMBER}"
           }
           stage('Deploy Kubernetes'){
-                sh ssh root@110.239.71.215 kubectl apply -f /var/lib/jenkins/workspace/springboot springboot.yaml
+                sh "kubectl apply -f springboot.yaml"
           }
     }catch(e){
 //         currentBuild.result = "FAILED"
